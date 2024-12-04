@@ -1,7 +1,6 @@
 import { Column, Task } from '@/types';
 import React, { useState } from 'react';
 import Model from '../common/Model';
-import Button from '../ui/Button';
 import AddIcon from '../ui/icons/Add.icon';
 import TaskForm from './TaskForm';
 
@@ -22,8 +21,17 @@ const AddTask: React.FC<AddTaskProps> = ({ column, setTasks }) => {
 
   return (
     <>
-        <Button  className='text-white' onClick={() => setOpen(true)} icon={<AddIcon />}>
-        </Button>
+        <button  className='
+            w-28
+            px-2 py-1
+            flex justify-between items-center
+            text-sm text-gray-300
+            border border-gray-300 rounded 
+            hover:text-white duration-100 hover:border-white'
+            onClick={() => setOpen(true)}>
+            <AddIcon />
+            <span>Add Task</span>
+        </button>
         
         <Model open={open} onClose={onClose}>
             <TaskForm onClose={onClose} column={column} />

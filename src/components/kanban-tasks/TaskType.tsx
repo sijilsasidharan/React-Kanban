@@ -13,7 +13,6 @@ const taskTypeColor: Readonly<Record<KanbanTaskType, Color>> = {
 }
 
 const TaskType: React.FC<TaskTypeProps> = ({ type, children }) => {
-    console.log(taskTypeColor[type]);
   return (
     <div style={{ borderColor: taskTypeColor[type]}} className={`border-l-4 rounded`}>
         {children}

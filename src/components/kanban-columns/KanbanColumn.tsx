@@ -9,10 +9,11 @@ import DeleteIcon from '../ui/icons/Delete.icon';
 interface KanbanColumnProps {
     key?: string;
     column: Column;
+    activeTask: Task;
     onDelete: (id: string) => void;
 }
 
-const KanbanColumn: React.FC<KanbanColumnProps> = ({ column, onDelete }) => {
+const KanbanColumn: React.FC<KanbanColumnProps> = ({ column, activeTask, onDelete }) => {
   if (!column?.tasks) {
     column.tasks = [];
   }
@@ -32,22 +33,22 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ column, onDelete }) => {
   
   return (
     <>
-    <div className='w-80 min-w-80 h-full flex flex-col gap-2 bg-zinc-800 px-4 py-2 rounded'>
+    <div className='w-80 min-w-80 h-full flex flex-col gap-2 bg-[#161a1d] px-4 py-2 rounded'>
       <div className='flex justify-between items-center '>
         <div className='flex items-center justify-center gap-2'>
+          <EditableText className='text-xl' initialText={column.name} onBlur={handleBlur} />
           <span className="inline-flex items-center justify-center w-6 h-6 ms-2 text-xs font-semibold text-zinc-100 bg-zinc-950 rounded-full ring ring-red-600">
             {currentColumn.tasks?.length || 0}
           </span>
-          <EditableText className='text-xl' initialText={column.name} onBlur={handleBlur} />
         </div>
         <div className='flex gap-2'>
-          <AddTask column={column} setTasks={setTasks} />
           <Button  className='text-white' onClick={() => onDelete(column.id)} icon={<DeleteIcon />}>
           </Button>
         </div>
       </div>
       <hr />
-      <TaskList tasks={currentColumn.tasks!} />
+      <TaskList tasks={currentColumn.tasks!} activeTask={activeTask} />
+      <AddTask column={column} setTasks={setTasks} />
     </div>
     </>
   )
