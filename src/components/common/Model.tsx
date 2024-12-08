@@ -8,8 +8,6 @@ interface ModelProps {
     onClose: () => void;
 }
 const Model: React.FC<ModelProps> = ({ open, children, wrapperId = 'model', onClose }) => {
-    if (!open) return null;
-
     const wrapper = document.getElementById(wrapperId)!
 
     useEffect(() => {
@@ -20,7 +18,9 @@ const Model: React.FC<ModelProps> = ({ open, children, wrapperId = 'model', onCl
         // return () => {
         //     wrapper.removeEventListener('click', listener);
         // }
-    }, [])
+    }, []);
+    
+    if (!open) return null;
     
     return createPortal(children, wrapper)
 };
