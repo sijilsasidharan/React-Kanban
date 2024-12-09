@@ -1,10 +1,11 @@
 import { Column, Task } from '@/types';
 import { uniqueId } from '@/utils';
-import React, { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEvent, useContext, useEffect, useRef, useState } from 'react';
 import Button from '../ui/Button';
 import AddIcon from '../ui/icons/Add.icon';
 import CloseIcon from '../ui/icons/Close.icon';
 import TaskStatus from './TaskStatus';
+import { KanbanTaskContext } from '../context/kanban-task.context';
 
 interface TaskFormProps {
     column: Column;
@@ -25,13 +26,18 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose }) => {
 
     const ref = useRef<HTMLInputElement>(null);
 
+    const { addTask } = useContext(KanbanTaskContext);
+
     useEffect(() => {
         ref.current?.focus();
     }, [])
 
-    const addTask = (event: FormEvent) => {
+    const handleSumbit = (event: FormEvent) => {
         event.preventDefault();
-        onClose(taskForm)
+        console.log(event);
+        addTask(taskForm)
+        onClose();
+        console.log('end');
     };
 
     const handleClose = (event: MouseEvent) => {
@@ -49,7 +55,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose }) => {
 
     const disable = () => !taskForm.name
   return (
-    <form onSubmit={addTask}>
+    <form onSubmit={handleSumbit}>
         <div className='flex justify-between items-center'>
             <h1 className='text-xl'>Create task</h1>
             <Button icon={<CloseIcon />} onClick={handleClose}></Button>

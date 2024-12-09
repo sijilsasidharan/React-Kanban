@@ -1,13 +1,14 @@
 import { TaskStatus as KanbanTaskStatus } from '@/types'
 import { STATUS_COLORS } from '@/utils'
-import React from 'react'
+import React, { memo } from 'react'
 
 interface TaskStatusProps {
     status: KanbanTaskStatus
 }
 
-const TaskStatus: React.FC<TaskStatusProps> = ({ status }) => {
+const TaskStatus: React.FC<TaskStatusProps> = memo(({ status }) => {
     const colors = `${STATUS_COLORS[status].bg} ${STATUS_COLORS[status].text}`;
+    console.log('Task Status');
   return (
     <div className={`
         text-[11px]
@@ -20,6 +21,6 @@ const TaskStatus: React.FC<TaskStatusProps> = ({ status }) => {
         ${colors}
     `}>{status}</div>
   )
-}
+});
 
 export default TaskStatus

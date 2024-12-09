@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
+import React, { memo, useContext } from 'react'
 import { Task as KanbanTask } from '@/types';
 import TaskType from './TaskType';
 import TaskStatus from './TaskStatus';
-import { DragOverlay, useDndContext, useDraggable } from '@dnd-kit/core';
-import { createPortal } from 'react-dom';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { KanbanTaskContext } from '../context/kanban-task.context';
 
 interface TaskProps {
     task: KanbanTask;
-    activeTask: KanbanTask;
 }
-const Task: React.FC<TaskProps> = ({ task, activeTask }) => {
+const Task: React.FC<TaskProps> = memo(({ task }) => {
 
+  const { column } = useContext(KanbanTaskContext);
   const {attributes, listeners, setNodeRef, transform, transition} = useSortable({
     id: task.id,
     data: {
       type: 'task',
-      task
+      task,
+      column
     }
   });
 
+  console.log('Task', task.name);
 
   const style = {
     transition,
@@ -38,19 +39,8 @@ const Task: React.FC<TaskProps> = ({ task, activeTask }) => {
           <div>{task.description}</div>
         </div>
       </TaskType>
-      { activeTask && createPortal(<DragOverlay>
-        <TaskType type={task.type}>
-          <div className='flex flex-col gap-4 bg-[#22272b] p-2 rounded'>
-            <div className='flex justify-between items-center'>
-              <span>{task.name}</span>
-              <TaskStatus status={task.status} />
-            </div>
-            <div>{task.description}</div>
-          </div>
-        </TaskType>
-      </DragOverlay>, document.body)}
     </div>
   )
-}
+});
 
 export default Task

@@ -6,15 +6,15 @@ import TaskForm from './TaskForm';
 
 interface AddTaskProps {
     column: Column;
-    setTasks: (task: Task) => void
+    // setTasks: (task: Task) => void
 }
 
-const AddTask: React.FC<AddTaskProps> = ({ column, setTasks }) => {
+const AddTask: React.FC<AddTaskProps> = ({ column }) => {
     const [open, setOpen] = useState(false);
 
     const onClose = (task: Task | undefined = undefined) => {
         if (task) {
-            setTasks(task)
+            // setTasks(task)
         }
         setOpen(false)
     }
