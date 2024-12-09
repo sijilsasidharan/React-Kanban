@@ -4,11 +4,7 @@ import Button from '../ui/Button';
 import AddIcon from '../ui/icons/Add.icon';
 import ColumnForm from './ColumnForm';
 
-interface AddColumnProps {
-    addColumn: (name: string) => void
-}
-
-const AddColumn: React.FC<AddColumnProps> = ({ addColumn }) => {
+const AddColumn: React.FC = () => {
     const [open, setOpen] = useState(false);
 
     const onClose = () => {
@@ -16,7 +12,6 @@ const AddColumn: React.FC<AddColumnProps> = ({ addColumn }) => {
     }
 
     const handleAddColumn = (name: string) => {
-        addColumn(name);
         setOpen(false);
     }
 
@@ -28,7 +23,7 @@ const AddColumn: React.FC<AddColumnProps> = ({ addColumn }) => {
         </Button>
         
         <Model open={open} onClose={onClose}>
-            <ColumnForm onClose={onClose} addColumn={handleAddColumn} />
+            <ColumnForm onClose={onClose} />
         </Model>
     </>
   )
