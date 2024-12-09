@@ -21,13 +21,6 @@ export const KanbanColumnContext = createContext<IKanbanColumnContext>({
 const KabanColumnProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [columns, setColumns] = useState<Column[]>([]);
 
-  // const addTask = (colId: string, task: Task) => {
-  //   const index = columns.findIndex(column => column.id === colId);
-  //   if (index === -1) return;
-  //   columns[index].tasks = [...(columns?.[index]?.tasks || []), task];
-  //   setColumns(columns);
-  // }
-
   const addColumn = (name: string, color: HEX) => {
     const column: Column = {
       id: uniqueId(),
