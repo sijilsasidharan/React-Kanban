@@ -9,7 +9,7 @@ const SideBar = () => {
       <div className="toolbar">
         <div className="flex items-center gap-2">
           <FontAwesomeIcon icon={faDashboard} />
-          <span>APP</span>
+          <h2>Kanban</h2>
         </div>
         <FontAwesomeIcon icon={faClose} />
       </div>
