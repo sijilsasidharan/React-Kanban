@@ -1,29 +1,56 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SIDEBAR } from "@/config/sidebar.config";
-import { faDashboard } from "@fortawesome/free-solid-svg-icons/faDashboard";
-import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import "./Sidebar.css";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "../ui/sidebar";
+import { ThemeSelection } from "./ThemeSelection";
+import { SquareKanban, User } from "lucide-react";
+import UserDropdown from "@/features/auth/UserDropdown";
 const SideBar = () => {
   return (
-    <nav className="sidebar-container">
-      <div className="toolbar">
-        <div className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faDashboard} />
-          <h2>Kanban</h2>
+    <Sidebar variant="floating" collapsible="icon">
+      <SidebarHeader>
+        <div className="flex justify-between items-center">
+          <div className="flex justify-center items-center gap-2">
+            <SquareKanban />
+            <span>KANBAN</span>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <ThemeSelection />
+            <UserDropdown />
+          </div>
         </div>
-        <FontAwesomeIcon icon={faClose} />
-      </div>
-      <ul>
-        {SIDEBAR.map((item) => {
-          return (
-            <li>
-              <FontAwesomeIcon icon={item.icon} />
-              <div>{item.name}</div>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup />
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {SIDEBAR.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild>
+                  <a href={item.url}>
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroupContent>
+        <SidebarGroup />
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
   );
 };
 
