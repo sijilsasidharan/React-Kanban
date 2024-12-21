@@ -1,7 +1,15 @@
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons/faChartSimple";
 import { faTable } from "@fortawesome/free-solid-svg-icons/faTable";
 import { Table } from "@mynaui/icons-react";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import {
+  Calendar,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+  GaugeCircle,
+  Kanban,
+} from "lucide-react";
 
 // export const SIDEBAR = [
 //   {
@@ -16,28 +24,23 @@ import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 
 export const SIDEBAR = [
   {
-    title: "Home",
-    url: "#",
-    icon: Home,
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: GaugeCircle,
   },
   {
     title: "Inbox",
-    url: "#",
+    url: "/inbox",
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Boards",
+    url: "/boards",
+    icon: Kanban,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ];
